@@ -1,0 +1,63 @@
+Bernardo Santos Simões Pires - DevWeb 23.11
+
+Parte 1 - Exercício Teórico
+
+Questão 1 - Ciclo de Requisição-Resposta e Execução no Servidor
+
+a) Ao acessar uma página PHP por uma URL HTTP, o navegador envia uma requisição ao servidor web, que encaminha o arquivo solicitado ao interpretador PHP. O servidor executa o código e devolve apenas o resultado do processamento, sem expor as instruções PHP originais. Isso acontece porque o PHP é executado no servidor, enquanto o navegador não possui um interpretador PHP integrado.
+
+b) O interpretador PHP é responsável por executar as instruções do arquivo, processar sua lógica e gerar o conteúdo da resposta HTTP, normalmente HTML ou texto, mas também podendo produzir JSON e outros formatos.
+
+Quando o arquivo é aberto diretamente pelo protocolo file://, não há comunicação com um servidor nem execução pelo interpretador PHP. O navegador apenas acessa o arquivo local, podendo exibir o código original em texto ou oferecer seu download.
+
+Questão 2 - Métodos de Envio HTTP: GET versus POST
+
+a) O método GET transmite os parâmetros pela URL, por meio da Query String (?chave=valor). É recomendado para consultas, pesquisas, filtros e paginação, pois permite compartilhar links, salvar resultados nos favoritos e repetir requisições sem alterar dados no servidor.
+
+O método POST transmite os dados no corpo (Body) da requisição HTTP. É recomendado para operações de criação e alteração de registros, como cadastros e envio de formulários.
+
+b) O método POST não garante segurança nem criptografa os dados, apenas determina que sejam enviados no corpo da requisição, em vez de aparecerem diretamente na URL. Sem criptografia, essas informações podem ser interceptadas durante a transmissão.
+
+Para proteger a comunicação, é indispensável utilizar HTTPS, que emprega o protocolo TLS para criptografar os dados transmitidos entre cliente e servidor. Portanto, tanto GET quanto POST podem ter sua comunicação protegida pelo HTTPS.
+
+Questão 3 - A Tríade de Tratamento de Dados: Normalização, Validação e Escape de Saída
+
+a) As três etapas possuem objetivos distintos:
+
+Normalização: prepara e padroniza os dados recebidos, removendo espaços desnecessários e ajustando sua representação.
+
+Validação: verifica se os dados atendem aos formatos, tipos, limites e regras de negócio estabelecidos pela aplicação.
+
+Escape de saída (Output Escaping): converte caracteres especiais em representações seguras antes de exibir os dados em uma página HTML, impedindo que sejam interpretados como código.
+
+b) Algumas funções nativas do PHP utilizadas nessas etapas são:
+
+trim(): remove espaços em branco no início e no final de uma string, realizando sua normalização.
+
+filter_var(): permite validar dados, como endereços de e-mail.
+
+mb_strlen(): verifica a quantidade de caracteres de uma string.
+
+in_array(): verifica se determinado valor pertence a uma lista autorizada, podendo utilizar comparação estrita.
+
+htmlspecialchars(): converte caracteres especiais, como <, >, aspas duplas e simples, em entidades HTML.
+
+O escape de saída evita ataques de Cross-Site Scripting (XSS), nos quais códigos maliciosos, como JavaScript, são inseridos em páginas para serem executados no navegador de outros usuários. Com htmlspecialchars(), esses caracteres são exibidos como texto, em vez de serem interpretados como código HTML.
+
+Questão 4 - Validação no Navegador (Cliente) versus Validação no Servidor (Backend)
+
+a) Essa abordagem representa uma falha de segurança porque o navegador é um ambiente não confiável, controlado pelo usuário. As validações HTML5 e JavaScript podem ser modificadas, desativadas ou ignoradas. Sem validação no backend, dados inválidos ou maliciosos podem ser processados e armazenados, comprometendo a integridade e a segurança da aplicação.
+
+b) As validações do cliente podem ser ignoradas ao desativar o JavaScript no navegador, modificar ou remover atributos dos campos utilizando o DevTools ou enviar requisições diretamente ao servidor por ferramentas como cURL e Postman.
+
+A validação no cliente serve para melhorar a experiência do usuário (UX), identificando erros imediatamente antes do envio. Já a validação no servidor é obrigatória e garante que os dados recebidos respeitem as regras de negócio e os requisitos de segurança antes de serem processados ou armazenados.
+
+Questão 5 - Manipulação Segura de Superglobais e Entradas Complexas
+
+a) O operador de coalescência nula (??) permite definir um valor padrão quando uma chave de uma superglobal não existe ou possui valor null. Dessa forma, evita avisos como Undefined array key, que ocorrem ao tentar acessar uma chave que não foi enviada pelo formulário.
+
+b) Para permitir a seleção de múltiplos itens em um formulário HTML, utiliza-se o sufixo [] no atributo name dos campos. Ao enviar o formulário, o PHP organiza automaticamente os valores selecionados em um array dentro de $_POST.
+
+No backend, deve-se verificar se o dado recebido realmente é um array, utilizando is_array(). Em seguida, é necessário percorrer seus elementos e verificar se cada valor pertence a uma lista de opções autorizadas (whitelist), utilizando in_array() com comparação estrita (true).
+
+Assim, somente valores previamente permitidos são aceitos, garantindo a integridade e a segurança dos dados recebidos.
