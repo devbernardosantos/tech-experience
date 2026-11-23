@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Experience 2026 — Inscrição em oficinas</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <h1>Tech Experience 2026</h1>
+      <p class="subtitle">Inscreva-se nas oficinas técnicas do evento</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" aria-labelledby="titulo-form">
+      <h2 id="titulo-form">Formulário de inscrição</h2>
+      <p class="hint">Campos com asterisco (*) são obrigatórios.</p>
+
+      <form id="form-inscricao" action="processar.php" method="post">
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="nome">Nome completo <span class="required" aria-hidden="true">*</span></label>
+            <input type="text" id="nome" name="nome" required minlength="3" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail <span class="required" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="experiencia">Nível de experiência <span class="required" aria-hidden="true">*</span></label>
+            <select id="experiencia" name="experiencia" required>
+              <option value="">Selecione...</option>
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+            </select>
+          </div>
+
+          <fieldset class="field">
+            <legend>Turno de preferência <span class="required" aria-hidden="true">*</span></legend>
+            <div class="options">
+              <div class="option">
+                <input type="radio" id="turno-manha" name="turno" value="manha" required>
+                <label for="turno-manha">Manhã</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="turno-noite" name="turno" value="noite" required>
+                <label for="turno-noite">Noite</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="field field--full">
+            <legend>Oficinas de interesse <span class="required" aria-hidden="true">*</span></legend>
+            <div class="options" id="grupo-oficinas">
+              <div class="option">
+                <input type="checkbox" id="oficina-html-css" name="oficinas[]" value="html_css">
+                <label for="oficina-html-css">HTML5 e CSS3</label>
+              </div>
+              <div class="option">
+                <input type="checkbox" id="oficina-js-dom" name="oficinas[]" value="js_dom">
+                <label for="oficina-js-dom">JavaScript e DOM</label>
+              </div>
+              <div class="option">
+                <input type="checkbox" id="oficina-php-backend" name="oficinas[]" value="php_backend">
+                <label for="oficina-php-backend">PHP e Back-end</label>
+              </div>
+            </div>
+            <p class="error-message" id="erro-oficinas" role="alert" hidden>Selecione pelo menos uma oficina para continuar.</p>
+          </fieldset>
+
+          <div class="field field--full">
+            <label for="mensagem">Mensagem / Motivação (opcional)</label>
+            <textarea id="mensagem" name="mensagem" rows="4" maxlength="200" aria-describedby="contador"></textarea>
+            <p class="counter" id="contador">Restam 200 caracteres</p>
+          </div>
+
+          <div class="field field--full actions">
+            <button type="submit" class="btn">Enviar inscrição</button>
+          </div>
+
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Tech Experience — Projeto acadêmico</p>
+    </div>
+  </footer>
+
+</body>
+</html>
